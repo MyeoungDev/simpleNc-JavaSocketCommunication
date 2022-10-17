@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class MySocketClient {
+public class MySocketClient2 {
     public static void main(String[] args) {
 
         try {
