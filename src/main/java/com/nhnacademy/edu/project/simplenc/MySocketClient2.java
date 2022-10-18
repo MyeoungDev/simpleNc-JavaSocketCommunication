@@ -14,19 +14,16 @@ public class MySocketClient2 {
             System.out.println("명령어를 입력해 주세요. (ex: snc 127.0.0.1 <using port num> )");
             Socket socket = null;
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String commends = br.readLine();
-            String[] commend = commends.split(" ");
-            if (!commend[0].equals("snc")) {
+            if (!args[0].equals("snc")) {
                 throw new RuntimeException("잘못된 명령어 입니다.");
             }
 
-            if (!commend[1].equals("127.0.0.1")) {
+            if (!args[1].equals("127.0.0.1")) {
                 throw new RuntimeException("잘못된 명령어 입니다.");
             }
 
-            String ip = commend[1];
-            int port = Integer.parseInt(commend[2]);
+            String ip = args[1];
+            int port = Integer.parseInt(args[2]);
 
 
             socket = new Socket(ip, port);
