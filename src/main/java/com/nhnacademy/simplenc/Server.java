@@ -4,12 +4,27 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server2 {
+public class Server {
     public static void main(String[] args) throws IOException {
+        if (!args[0].equals("snc")) {
+            throw new RuntimeException();
+        }
+
+        if (!args[1].equals("-l")) {
+            throw new RuntimeException();
+        }
+
         ServerSocket serverSocket = null;
+        int serverPort = 0;
 
         try {
-            serverSocket = new ServerSocket(3000);
+            serverPort = Integer.parseInt(args[2]);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            serverSocket = new ServerSocket(serverPort);
         } catch (IOException e) {
             e.printStackTrace();
         }

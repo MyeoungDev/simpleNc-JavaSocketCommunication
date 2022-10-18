@@ -4,17 +4,33 @@ import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Client2 {
+public class Client {
     public static void main(String[] args) throws IOException {
 
-        String serverHostname = "127.0.0.1";
-        Socket echoSocket = null;
+        if (!args[0].equals("snc")) {
+            throw new RuntimeException();
+        }
+
+        if (!args[1].equals("127.0.0.1")) {
+            throw new RuntimeException();
+        }
+
+        int serverPort = 0;
 
         try {
-            echoSocket = new Socket(serverHostname, 3000);
+            serverPort = Integer.parseInt(args[2]);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
 
-            ClientWrite write = new ClientWrite(echoSocket);
-            ClientListen listen = new ClientListen(echoSocket);
+        String serverHostname = "127.0.0.1";
+        Socket socket = null;
+
+        try {
+            socket = new Socket(serverHostname, serverPort);
+
+            ClientWrite write = new ClientWrite(socket);
+            ClientListen listen = new ClientListen(socket);
 
             write.start();
             listen.start();
