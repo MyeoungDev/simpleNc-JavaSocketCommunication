@@ -1,18 +1,16 @@
-package com.nhnacademy.edu.project.simplenc;
-
-import sun.misc.Signal;
+package com.nhnacademy.simplenc;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class MySocketServer extends Thread {
+public class SocketServer extends Thread {
 
     static ArrayList<Socket> list = new ArrayList<>();
     static Socket socket = null;
 
-    public MySocketServer(Socket socket) {
+    public SocketServer(Socket socket) {
         this.socket = socket;
         list.add(socket);
     }
@@ -56,12 +54,6 @@ public class MySocketServer extends Thread {
     public static void main(String[] args) {
         try {
 
-            System.out.println("명령어를 입력하여 주세요. (ex: snc -l <using port num>");
-//            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//            String startingLine = br.readLine();
-//
-//            String[] commends = startingLine.split(" ");
-
             String startCommend = "snc";
             String localHost = "-l";
             int socketPort = 0;
@@ -81,7 +73,7 @@ public class MySocketServer extends Thread {
 
             while (true) {
                 Socket socketUser = serverSocket.accept();
-                Thread thread = new MySocketServer(socketUser);
+                Thread thread = new SocketServer(socketUser);
                 thread.start();
             }
         } catch (IOException e) {
